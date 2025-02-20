@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             // Update the UI with the result
-            Log.d("Coroutine", result)
+            Log.d("Coroutine", result) //####
         }
     }
 }
