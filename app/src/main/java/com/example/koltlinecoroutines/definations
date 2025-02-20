@@ -1,0 +1,30 @@
+Threads::::::::::::
+::::::::::::::::::::
+Definition: A thread is the smallest unit of processing that can be scheduled by an operating system.
+Threads are used to perform tasks concurrently, allowing multiple operations to run at the same time.
+
+
+Coroutines::::::
+are the lightweight thread but not actually thread they work on top of threads .
+to define coroutines function we need to define two things one coroutine scope (function lifecycle attachment) and second thing we need is
+the context (on which thread the coroutine function will get executed)
+Dispatcher are threadpool they provide the threads on which the coroutines will get executed there are three main Dispatcher
+the word Dispatcher means dispatching the coroutines function on threads
+Dispatcher.i/o,main,default
+
+so in order to execute multiple coroutines on one thread we use susped modifier on that function and locate the suspension point by writing yeild()
+so this way coroutines functions will cooprate with eachother.
+//see example in MainActivity
+
+
+Job
+Definition: A Job is a handle to a coroutine. It represents a cancellable task and can be used to manage the lifecycle of a coroutine.
+When you launch a coroutine, you can obtain a Job object that allows you to control the coroutine's execution.
+
+Async
+Definition: The async function is used to start a coroutine that returns a result.
+It is similar to launch, but while launch returns a Job, async returns a Deferred<T>,
+which is a non-blocking cancellable future that represents a promise to provide a result.
+
+
+

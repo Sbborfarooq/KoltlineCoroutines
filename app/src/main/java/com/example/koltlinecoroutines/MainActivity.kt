@@ -1,45 +1,48 @@
 package com.example.koltlinecoroutines
 
+import android.content.ContentValues.TAG
+import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.yield
 
 
 class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+    private val TAG:String="MainActivity"
+    override  fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Start the coroutine
-        performBackgroundTask()
+        //Creating first coroutine function
+        CoroutineScope(Dispatchers.Main).launch {task1()  }
+        CoroutineScope(Dispatchers.Main).launch {task2()  }
 
 
 
     }
-    private fun performBackgroundTask() {
-        // Launch a coroutine in the Main scope
-        CoroutineScope(Dispatchers.Main).launch {
-            Log.d("Coroutine", "Preparing to start the task...")
 
-            // Switch to the IO dispatcher for background work
-            val result = withContext(Dispatchers.IO) {
-                Log.d("Coroutine", "Task started in background")
-                for (i in 1..5) {
-                    // Simulate a time-consuming task
-                    delay(1000) // Delay for 1 second
-                    Log.d("Coroutine", "Progress: ${i * 20}%")
-                }
-                "Task Completed!"
-            }
 
-            // Update the UI with the result
-            Log.d("Coroutine", result)
-        }
+
+
+    //here we have two function named with task1 and task2
+    suspend fun task1(){
+        Log.d(TAG,"Starting Task1")
+        yield()//suspension point
+        Log.d(TAG,"Ending Task1")
+    }
+
+    suspend fun task2(){
+        Log.d(TAG,"Starting Task2")
+        yield()//suspension point
+        Log.d(TAG,"Ending Task2")
     }
 }
