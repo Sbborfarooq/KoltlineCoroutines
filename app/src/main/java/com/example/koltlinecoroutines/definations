@@ -16,7 +16,9 @@ so in order to execute multiple coroutines on one thread we use susped modifier 
 so this way coroutines functions will cooprate with eachother.
 //see example in MainActivity
 
-
+launch
+Purpose: Used to start a new coroutine that does not return a result.
+It is typically used for launching coroutines that perform side effects, such as updating the UI or making network requests.
 Job
 Definition: A Job is a handle to a coroutine. It represents a cancellable task and can be used to manage the lifecycle of a coroutine.
 When you launch a coroutine, you can obtain a Job object that allows you to control the coroutine's execution.
@@ -25,6 +27,12 @@ Async
 Definition: The async function is used to start a coroutine that returns a result.
 It is similar to launch, but while launch returns a Job, async returns a Deferred<T>,
 which is a non-blocking cancellable future that represents a promise to provide a result.
+
+Choosing the Right Builder
+Use launch when you want to perform a task that does not need to return a value and you want to manage its lifecycle.
+Use async when you need to perform concurrent tasks and expect a result.
+Use runBlocking in scenarios where you need to block the current thread, such as in the main function or unit tests.
+Use withContext when you need to switch the execution context of a coroutine without starting a new one.
 
 
 
